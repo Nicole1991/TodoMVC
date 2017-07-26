@@ -1,4 +1,4 @@
-package com.todomvc.todomvc;
+package com.todomvc;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

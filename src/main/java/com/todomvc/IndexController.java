@@ -1,6 +1,7 @@
-package com.todomvc.todomvc;
+package com.todomvc;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -8,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IndexController {
 
     @RequestMapping("/")
-    @ResponseBody
     public String index() {
-        return "Hello World";
+        System.out.print("hello index");
+        return "index";
     }
 }
