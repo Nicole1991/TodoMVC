@@ -6,3 +6,7 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+deploy:
+  provider: heroku
+  api_key: 18c441dd-efc5-4c37-a9aa-ce496dc83cca
+  app: todomvc-luo
