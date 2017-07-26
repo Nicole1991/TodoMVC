@@ -1,4 +1,8 @@
 language: java
+deploy:
+  provider: heroku
+  api_key: eed0c401-f835-41ab-9fe3-6bb119dad2a0
+  app: shielded-spire-54413
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
