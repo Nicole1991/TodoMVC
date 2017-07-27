@@ -4,24 +4,26 @@ import com.todomvc.domain.ToDoItem;
 import com.todomvc.repository.ToDoItemRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @Repository
 public class ToDoItemRepositoryImpl implements ToDoItemRepository
 {
-    private AtomicLong atomicLongId = new AtomicLong();
+    private AtomicLong currentId = new AtomicLong();
     private ConcurrentHashMap<Long, ToDoItem> itemsInRepository = new ConcurrentHashMap<Long, ToDoItem>();
 
     @Override
     public List<ToDoItem> findAll() {
-        return (List<ToDoItem>) itemsInRepository.values();
+        return new ArrayList<>(itemsInRepository.values());
     }
 
     @Override
     public List<ToDoItem> findByStatus(boolean status) {
-        return (List<ToDoItem>) itemsInRepository.get(status);
+        return itemsInRepository.values().stream().filter(item -> item.isCompleted() == status).collect(Collectors.toList());
     }
 
     @Override
@@ -31,7 +33,7 @@ public class ToDoItemRepositoryImpl implements ToDoItemRepository
 
     @Override
     public Long insert(ToDoItem item) {
-        Long id = atomicLongId.incrementAndGet();
+        Long id = currentId.incrementAndGet();
         item.setId(id);
         itemsInRepository.put(id, item);
         return id;
@@ -39,7 +41,7 @@ public class ToDoItemRepositoryImpl implements ToDoItemRepository
 
     @Override
     public void delete(ToDoItem item) {
-        itemsInRepository.remove(item);
+        itemsInRepository.remove(item.getId());
     }
 
     @Override
