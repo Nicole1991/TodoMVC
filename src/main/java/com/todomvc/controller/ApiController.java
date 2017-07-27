@@ -1,4 +1,4 @@
-package com.todomvc;
+package com.todomvc.controller;
 
 import com.todomvc.domain.ToDoItem;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,4 +16,6 @@ public class ApiController {
         System.out.println(item.getContent());
         return item.getId();
     }
+
+
 }

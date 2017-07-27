@@ -4,7 +4,7 @@ public class ToDoItem {
 
     private Long id;
     private String content;
-    private boolean status;
+    private boolean isCompleted;
 
     public Long getId() {
         return id;
@@ -22,11 +22,11 @@ public class ToDoItem {
         this.content = content;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isCompleted() {
+        return isCompleted;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setCompleted(boolean completed) {
+        this.isCompleted = completed;
     }
 }

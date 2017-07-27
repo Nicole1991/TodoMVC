@@ -1,10 +1,10 @@
-package com.todomvc.resposity;
+package com.todomvc.repository;
 
 import com.todomvc.domain.ToDoItem;
 
 import java.util.List;
 
-public interface ToDoItemReposity {
+public interface ToDoItemRepository {
 
     List<ToDoItem> findAll();
     List<ToDoItem> findByStatus(boolean status);
