@@ -41,22 +41,7 @@ task printVersion2(group: 'versioning', description:'Prints project version.')  
         logger.quiet "Version: $version"
     }
 }
-/*ext.versionFile = file('version.properties')
 
-task loadVersion {
-    project.version = readVersion()
-}
-
-
-
-task makeRelaseVersion(group: 'versioning', description: 'Makes project a release version.')  {
-    doLast{
-        version.release = true;
-        ant.properties(file: versionFile) {
-            entry(key: 'release', type: 'string', operation: '=', value: 'true')
-        }
-    }
-}*/
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-cache')
 	compile('org.springframework.boot:spring-boot-starter-web')
