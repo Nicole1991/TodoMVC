@@ -4,7 +4,7 @@ import com.todomvc.domain.ToDoItem;
 
 import java.util.List;
 
-public interface ToDoItemReposity {
+public interface ToDoItemRepository {
 
     List<ToDoItem> findAll();
     List<ToDoItem> findByStatus(boolean status);

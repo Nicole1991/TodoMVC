@@ -1,19 +1,20 @@
 package com.todomvc;
 
 import com.todomvc.domain.ToDoItem;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.todomvc.service.ToDoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api")
 public class ApiController {
 
+    @Autowired
+    ToDoService service;
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Long add(ToDoItem item) {
-        System.out.println(item.getId());
-        System.out.println(item.getContent());
-        return item.getId();
+    public Long add(@RequestParam(value = "content") String content) {
+        service.add(content);
+        return 0L;
     }
 }
