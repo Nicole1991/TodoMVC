@@ -1,4 +1,4 @@
-package com.todomvc.todomvc;
+package com.todomvc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
