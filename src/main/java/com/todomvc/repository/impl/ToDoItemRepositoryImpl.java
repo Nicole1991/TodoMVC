@@ -32,16 +32,16 @@ public class ToDoItemRepositoryImpl implements ToDoItemRepository
     }
 
     @Override
-    public Long insert(ToDoItem item) {
+    public ToDoItem insert(ToDoItem item) {
         Long id = currentId.incrementAndGet();
         item.setId(id);
         itemsInRepository.put(id, item);
-        return id;
+        return item;
     }
 
     @Override
-    public void delete(ToDoItem item) {
-        itemsInRepository.remove(item.getId());
+    public void delete(Long id) {
+        itemsInRepository.remove(id);
     }
 
     @Override

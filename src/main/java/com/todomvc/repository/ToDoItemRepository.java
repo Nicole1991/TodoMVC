@@ -9,7 +9,7 @@ public interface ToDoItemRepository {
     List<ToDoItem> findAll();
     List<ToDoItem> findByStatus(boolean status);
     ToDoItem findById(Long id);
-    Long insert(ToDoItem item);
-    void delete(ToDoItem item);
+    ToDoItem insert(ToDoItem item);
     void update(ToDoItem item);
+    void delete(Long id);
 }
