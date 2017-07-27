@@ -20,8 +20,8 @@ public class ApiController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ToDoItem update(ToDoItem item) {
-        return service.update(item);
+    public void update(ToDoItem item) {
+        service.update(item);
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
