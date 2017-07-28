@@ -33,6 +33,7 @@ public class TodoItemRepositoryTest {
         mockItemsRepository = easyMockSupport.createMock(ConcurrentHashMap.class);
         setField(todoItemRepository, "currentId", mockAtomicLong);
         setField(todoItemRepository, "itemsInRepository", mockItemsRepository);
+
     }
 
     @Test
@@ -48,12 +49,12 @@ public class TodoItemRepositoryTest {
 
     @Test
     public void shouldReturnAllCompletedItems() {
-
         expect(mockItemsRepository.values()).andReturn(newArrayList
                 (new TodoItem(1L,"help",true),
                         new TodoItem(2L,"app1",true),
                         new TodoItem(3L,"application",false)
                 ));
+
         easyMockSupport.replayAll();
         List<TodoItem> completedTodoItem = todoItemRepository.findByStatus(true);
         easyMockSupport.verifyAll();
@@ -70,4 +71,15 @@ public class TodoItemRepositoryTest {
         assertThat(item.getId(), is(1L));
         assertThat(item.getContent(), is("Hello"));
     }
+
+    @Test
+    public void shouldReturnItemWhenInsertANewItem() throws Exception {
+       /* expect(mockItemsRepository.put(1L, new TodoItem(1L, "Hello", true))).andReturn(new TodoItem(1L, "Hello", true));
+        expect(mockAtomicLong.incrementAndGet()).andReturn(null);
+        easyMockSupport.replayAll();
+        TodoItem item = todoItemRepository.insert(new TodoItem(1L, "Hello", true));
+        easyMockSupport.verifyAll();
+        assertThat(item.getId(), is(1L));*/
+    }
+
 }
