@@ -10,8 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
-public class ToDoItemRepositoryImpl implements ToDoItemRepository
-{
+public class ToDoItemRepositoryImpl implements ToDoItemRepository {
+
     private AtomicLong atomicLongId = new AtomicLong();
     private ConcurrentHashMap<Long, ToDoItem> itemsInRepository = new ConcurrentHashMap<Long, ToDoItem>();
 
@@ -45,6 +45,6 @@ public class ToDoItemRepositoryImpl implements ToDoItemRepository
 
     @Override
     public void update(ToDoItem toDoItem) {
-        itemsInRepository.replace(toDoItem.getId(),toDoItem);
+        itemsInRepository.replace(toDoItem.getId(), toDoItem);
     }
 }

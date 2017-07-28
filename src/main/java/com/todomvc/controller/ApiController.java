@@ -3,6 +3,7 @@ package com.todomvc.controller;
 import com.todomvc.domain.ToDoItem;
 import com.todomvc.service.TodoItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,5 +34,11 @@ public class ApiController {
     @RequestMapping(value = "/all",method = RequestMethod.GET)
     public List<ToDoItem> findAll(){
         return todoItemService.findAll();
+    }
+
+    @RequestMapping(value = "/showAllItem",method = RequestMethod.GET)
+    public String findAllTodoItem(Model model,@ModelAttribute("todoItem") ToDoItem toDoItem){
+        model.addAttribute("todoItem", todoItemService.findAll());
+        return "home";
     }
 }
