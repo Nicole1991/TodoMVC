@@ -60,4 +60,14 @@ public class TodoItemRepositoryTest {
 
         assertThat(completedTodoItem.size(),is(2));
     }
+
+    @Test
+    public void shouldReturnTheItemByGivenId() {
+        expect(mockItemsRepository.get(1L)).andReturn(new TodoItem(1L, "Hello", true));
+        easyMockSupport.replayAll();
+        TodoItem item = todoItemRepository.findById(1L);
+        easyMockSupport.verifyAll();
+        assertThat(item.getId(), is(1L));
+        assertThat(item.getContent(), is("Hello"));
+    }
 }
