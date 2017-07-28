@@ -11,8 +11,9 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Repository
-public class ToDoItemRepositoryImpl implements ToDoItemRepository
-{
+
+public class ToDoItemRepositoryImpl implements ToDoItemRepository {
+
     private AtomicLong currentId = new AtomicLong();
     private ConcurrentHashMap<Long, ToDoItem> itemsInRepository = new ConcurrentHashMap<Long, ToDoItem>();
 
@@ -23,7 +24,8 @@ public class ToDoItemRepositoryImpl implements ToDoItemRepository
 
     @Override
     public List<ToDoItem> findByStatus(boolean status) {
-        return itemsInRepository.values().stream().filter(item -> item.isCompleted() == status).collect(Collectors.toList());
+        return itemsInRepository.values().stream().
+                filter(item -> item.isCompleted() == status).collect(Collectors.toList());
     }
 
     @Override
@@ -45,7 +47,7 @@ public class ToDoItemRepositoryImpl implements ToDoItemRepository
     }
 
     @Override
-    public void update(ToDoItem newItem) {
-        itemsInRepository.replace(newItem.getId(),newItem);
+    public void update(ToDoItem toDoItem) {
+        itemsInRepository.replace(toDoItem.getId(), toDoItem);
     }
 }

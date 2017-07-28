@@ -1,55 +1,49 @@
 package com.todomvc.repository.impl;
 
 import com.todomvc.domain.ToDoItem;
-import com.todomvc.repository.ToDoItemRepository;
-import org.junit.Assert;
+import org.easymock.EasyMockSupport;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.verify;
+import static org.assertj.core.util.Lists.newArrayList;
+import static org.easymock.EasyMock.expect;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.springframework.test.util.ReflectionTestUtils.setField;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class ToDoItemRepositoryImplTest {
 
-    @Autowired
-    ToDoItemRepository repository;
+    private final EasyMockSupport easyMockSupport;
+    private ToDoItemRepositoryImpl toDoItemRepository;
+    private ConcurrentHashMap mockItemsRepository;
+    private AtomicLong mockAtomicLong;
 
-    ToDoItem toDoItem;
-    List<ToDoItem> toDoItems = new ArrayList<ToDoItem>();
+    public ToDoItemRepositoryImplTest() {
+        easyMockSupport = new EasyMockSupport();
+    }
 
     @Before
-    public void setUp(){
-        toDoItem = new ToDoItem();
-        toDoItem.setContent("test todoItem");
-        toDoItem.setCompleted(false);
-        toDoItems.add(toDoItem);
+    public void setUp() {
+        toDoItemRepository = new ToDoItemRepositoryImpl();
+        mockAtomicLong = easyMockSupport.createMock(AtomicLong.class);
+        mockItemsRepository = easyMockSupport.createMock(ConcurrentHashMap.class);
+        setField(toDoItemRepository, "atomicLongId", mockAtomicLong);
+        setField(toDoItemRepository, "itemsInRepository", mockItemsRepository);
     }
 
     @Test
     public void shouldReturnAllItemsInRepository() throws Exception {
-        for (ToDoItem toDoItemList:toDoItems
-             ) {
-            toDoItemList.getId();
-            Assert.assertEquals("test todoItem", toDoItemList.getContent());
-        }
-    }
+        expect(mockItemsRepository.values()).andReturn(newArrayList(new ToDoItem()));
 
-    @Test
-    public void shouldReturnItemsStatusAreCompleted() throws Exception {
-        for (ToDoItem toDoItemList:toDoItems
-                ) {
-            toDoItemList.isCompleted();
-            Assert.assertEquals(false, toDoItemList.isCompleted());
-        }
+        easyMockSupport.replayAll();
+        List<ToDoItem> all = toDoItemRepository.findAll();
+        easyMockSupport.verifyAll();
+
+        assertThat(all.size(), is(1));
     }
 
 }
