@@ -45,4 +45,19 @@ public class TodoItemRepositoryTest {
 
         assertThat(all.size(), is(1));
     }
+
+    @Test
+    public void shouldReturnAllCompletedItems() {
+
+        expect(mockItemsRepository.values()).andReturn(newArrayList
+                (new TodoItem(1L,"help",true),
+                        new TodoItem(2L,"app1",true),
+                        new TodoItem(3L,"application",false)
+                ));
+        easyMockSupport.replayAll();
+        List<TodoItem> completedTodoItem = todoItemRepository.findByStatus(true);
+        easyMockSupport.verifyAll();
+
+        assertThat(completedTodoItem.size(),is(2));
+    }
 }
