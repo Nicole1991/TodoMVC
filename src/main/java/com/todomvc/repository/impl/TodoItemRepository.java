@@ -1,7 +1,6 @@
 package com.todomvc.repository.impl;
 
-import com.todomvc.domain.ToDoItem;
-import com.todomvc.repository.ToDoItemRepository;
+import com.todomvc.domain.TodoItem;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,42 +11,43 @@ import java.util.stream.Collectors;
 
 @Repository
 
-public class ToDoItemRepositoryImpl implements ToDoItemRepository {
+public class TodoItemRepository {
 
     private AtomicLong currentId = new AtomicLong();
-    private ConcurrentHashMap<Long, ToDoItem> itemsInRepository = new ConcurrentHashMap<Long, ToDoItem>();
+    private ConcurrentHashMap<Long, TodoItem> itemsInRepository = new ConcurrentHashMap<Long, TodoItem>();
 
-    @Override
-    public List<ToDoItem> findAll() {
+    
+    public List<TodoItem> findAll() {
         return new ArrayList<>(itemsInRepository.values());
     }
 
-    @Override
-    public List<ToDoItem> findByStatus(boolean status) {
+    
+    public List<TodoItem> findByStatus(boolean status) {
         return itemsInRepository.values().stream().
-                filter(item -> item.isCompleted() == status).collect(Collectors.toList());
+                filter(item -> item.isCompleted() == status).
+                collect(Collectors.toList());
     }
 
-    @Override
-    public ToDoItem findById(Long id) {
+    
+    public TodoItem findById(Long id) {
         return itemsInRepository.get(id);
     }
 
-    @Override
-    public ToDoItem insert(ToDoItem item) {
+    
+    public TodoItem insert(TodoItem item) {
         Long id = currentId.incrementAndGet();
         item.setId(id);
         itemsInRepository.put(id, item);
         return item;
     }
 
-    @Override
+    
     public void delete(Long id) {
         itemsInRepository.remove(id);
     }
 
-    @Override
-    public void update(ToDoItem toDoItem) {
-        itemsInRepository.replace(toDoItem.getId(), toDoItem);
+    
+    public void update(TodoItem todoItem) {
+        itemsInRepository.replace(todoItem.getId(), todoItem);
     }
 }

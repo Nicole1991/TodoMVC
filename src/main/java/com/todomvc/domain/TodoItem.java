@@ -1,10 +1,19 @@
 package com.todomvc.domain;
 
-public class ToDoItem {
+public class TodoItem {
 
     private Long id;
     private String content;
     private boolean isCompleted;
+
+    public TodoItem() {
+    }
+
+    public TodoItem(Long id, String content, boolean isCompleted) {
+        this.id = id;
+        this.content = content;
+        this.isCompleted = isCompleted;
+    }
 
     public Long getId() {
         return id;
