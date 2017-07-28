@@ -7,9 +7,9 @@ import java.util.List;
 public interface ToDoItemRepository {
 
     List<ToDoItem> findAll();
-    List<ToDoItem> findByStatus(boolean status);
+    List<ToDoItem> findByIsCompleted(boolean status);
     ToDoItem findById(Long id);
-    Long insert(ToDoItem item);
-    void delete(ToDoItem item);
+    ToDoItem insert(ToDoItem item);
+    void delete(Long id);
     void update(ToDoItem item);
 }
